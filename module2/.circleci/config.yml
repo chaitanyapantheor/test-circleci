@@ -1,19 +1,56 @@
 version: 2.1
 
+jobs:
+  prod-check:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Which branch"
+          command: |
+            echo $CIRCLE_BRANCH
+      - run:
+          name: "Which tag"
+          command: |
+            echo $CIRCLE_TAG
+  dev-check:
+    # Specify the execution environment. You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # See: https://circleci.com/docs/2.0/configuration-reference/#docker-machine-macos-windows-executor
+    docker:
+      - image: cimg/base:stable
+    # Add steps to the job
+    # See: https://circleci.com/docs/2.0/configuration-reference/#steps
+    steps:
+      - checkout
+      - run:
+          name: "Which branch"
+          command: |
+            echo $CIRCLE_BRANCH
+      - run:
+          name: "Which tag"
+          command: |
+            echo $CIRCLE_TAG
+
+
 workflows:
-  module2-say-hello-workflow:
+  module2-workflow:
     jobs:
-      - say-hello-prod:
-          name: module2-say-hello-prod
+      - prod-check:
+          name: module2-prod-check
           filters:
             branches:
               ignore: /.*/
             tags:
               only: /^v\d+\.\d+\.\d+$/
-      - say-hello-dev:
-          name: module2-say-hello-dev
+      - dev-check:
+          name: module2-dev-check
           filters:
             branches:
-              only: /^.*+$/
-            tags:
               ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
