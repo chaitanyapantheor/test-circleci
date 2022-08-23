@@ -1,0 +1,19 @@
+version: 2.1
+
+workflows:
+  module2-say-hello-workflow:
+    jobs:
+      - say-hello-prod:
+          name: module2-say-hello-prod
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v\d+\.\d+\.\d+$/
+      - say-hello-dev:
+          name: module2-say-hello-dev
+          filters:
+            branches:
+              only: /^.*+$/
+            tags:
+              ignore: /.*/
