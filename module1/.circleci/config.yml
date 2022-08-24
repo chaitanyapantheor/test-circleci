@@ -45,11 +45,11 @@ workflows:
             branches:
               ignore: /.*/
             tags:
-              only: /^v\d+\.\d+\.\d+$/
+              only: /^v.*/
       - dev-check:
           name: module1-dev-check
           filters:
             branches:
               ignore: /.*/
             tags:
-              only: /^v\d+\.\d+\.\d+$/
+              only: /^v.*/
