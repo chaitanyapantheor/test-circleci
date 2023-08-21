@@ -63,6 +63,7 @@ workflows:
           name: config-splitting/setup-dynamic-config-dev
           force-all: << pipeline.parameters.force-all >>
           base-revision: main
+          config-base-revision: << pipeline.parameters.dynamic-config-base-revision >>
           # If A is modified, the job for A will run
           # Similarly if B is modified, the job for B will run
           # If C is modified, then the jobs for both C and B (as a dependency) will run
@@ -78,6 +79,7 @@ workflows:
           name: config-splitting/setup-dynamic-config-prod
           force-all: true
           base-revision: main
+          config-base-revision: << pipeline.parameters.dynamic-config-base-revision >>
           # If A is modified, the job for A will run
           # Similarly if B is modified, the job for B will run
           # If C is modified, then the jobs for both C and B (as a dependency) will run
@@ -179,6 +181,10 @@ orbs:
             description: Revision to compare with the current HEAD
             type: string
             default: main
+          config-base-revision:
+            description: Revision to compare with the current HEAD
+            type: string
+            default: ""
           force-all:
             description: Emergency valve - forcibly build all the modules
             type: boolean
@@ -202,8 +208,8 @@ orbs:
               name: Test Sample run
               command: echo 'This is test run'
           - run:
-              name: Test git.base_revision
-              command: echo 'git.base_revision << pipeline.git.base_revision >>'
+              name: Test base-revision
+              command: echo 'config-base-revision << parameters.config-base-revision >>'
           # - run:
           #     name: Test Dynamic-config-base-revision
           #     command: echo 'Dynamic-config-base-revision << pipeline.parameters.dynamic-config-base-revision >>'
