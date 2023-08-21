@@ -202,8 +202,11 @@ orbs:
               name: Test Sample run
               command: echo 'This is test run'
           - run:
-              name: Test Dynamic-config-base-revision
-              command: echo 'Dynamic-config-base-revision << pipeline.parameters.dynamic-config-base-revision >>'
+              name: Test git.base_revision
+              command: echo 'git.base_revision << pipeline.git.base_revision >>'
+          # - run:
+          #     name: Test Dynamic-config-base-revision
+          #     command: echo 'Dynamic-config-base-revision << pipeline.parameters.dynamic-config-base-revision >>'
           - checkout
           - run:
               name: Install yq
