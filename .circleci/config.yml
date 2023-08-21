@@ -198,6 +198,7 @@ orbs:
         docker:
           - image: cimg/python:3.9
         steps:
+          - run: echo 'Dynamic-config-base-revision << pipeline.parameters.dynamic-config-base-revision >>'
           - checkout
           - run:
               name: Install yq
