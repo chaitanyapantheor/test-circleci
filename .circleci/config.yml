@@ -14,6 +14,10 @@ parameters:
     description: Emergency valve - forcibly build all the modules
     type: boolean
     default: false
+  dynamic-config-base-revision:
+    description: Base revision to consider for setup workflow
+    type: string
+    default: << pipeline.git.base_revision >>
 
 commands:
   common-tasks:
