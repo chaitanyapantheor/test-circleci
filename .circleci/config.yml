@@ -63,7 +63,7 @@ workflows:
           name: config-splitting/setup-dynamic-config-dev
           force-all: << pipeline.parameters.force-all >>
           base-revision: main
-          config-base-revision: << pipeline.parameters.dynamic-config-base-revision >>
+          config-base-revision: "thisisrandomhasd"
           # If A is modified, the job for A will run
           # Similarly if B is modified, the job for B will run
           # If C is modified, then the jobs for both C and B (as a dependency) will run
